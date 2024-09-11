@@ -48,13 +48,13 @@ SortingAlgorithm* CountingSort::clone()
 
 void CountingSort::execute()
 {
-	std::vector<int> negativeNums, positiveNums;
+	std::vector<int> negativeNums, nonNegativeNums;
 	size_t size = _data.size();
 	for (size_t i = 0; i < size; i++)
 	{
 		if (_data[i] >= 0)
 		{
-			positiveNums.push_back(_data[i]);
+			nonNegativeNums.push_back(_data[i]);
 		}
 		else
 		{
@@ -62,7 +62,7 @@ void CountingSort::execute()
 		}
 	}
 	sortArr(negativeNums);
-	size_t negativeSize = negativeNums.size(), positiveSize = positiveNums.size();
+	size_t negativeSize = negativeNums.size(), nonNegativeSize = nonNegativeNums.size();
 	for (size_t i = 0; i < negativeSize; i++)
 	{
 		negativeNums[i] *= -1;
@@ -71,13 +71,13 @@ void CountingSort::execute()
 	{
 		std::swap(negativeNums[i], negativeNums[negativeSize - i - 1]);
 	}
-	sortArr(positiveNums);
+	sortArr(nonNegativeNums);
 	for (size_t i = 0; i < negativeSize; i++)
 	{
 		_data[i] = negativeNums[i];
 	}
-	for (size_t i = 0; i < positiveSize; i++)
+	for (size_t i = 0; i < nonNegativeSize; i++)
 	{
-		_data[i + negativeSize] = positiveNums[i];
+		_data[i + negativeSize] = nonNegativeNums[i];
 	}
 }
