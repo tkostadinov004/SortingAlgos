@@ -19,12 +19,12 @@ std::vector<int> buildRandomizedVector(bool getUnique, int startRange, int endRa
 	for (size_t i = 0; i < sampleSize; i++)
 	{
 		int random = rand();
-		int range = endRange + abs(startRange) - 1;
+		int range = abs(endRange) - startRange + 1;
 
 		int generated = (random % range) - abs(startRange);
 		while (getUnique && nums.find(generated) != nums.end())
 		{
-			generated = (rand() % range) - abs(startRange);
+			generated = (rand() % range) + startRange;
 		}
 		nums.emplace(generated);
 		data.push_back(generated);
