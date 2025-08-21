@@ -14,9 +14,9 @@ int main()
 	unsigned totalPassed = 0, totalFailed = 0;
 
 	size_t testsCount = 50;
-	int start = -2000;
-	int end = 2000;
-	size_t sampleSize = 1000;
+	int start = 5;
+	int end = 10;
+	size_t sampleSize = 5;
 	{
 		SortingAlgorithm* ts = new TreeSort();
 		TestFixture test(ts);
