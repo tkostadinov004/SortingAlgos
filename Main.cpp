@@ -14,14 +14,14 @@ int main()
 	unsigned totalPassed = 0, totalFailed = 0;
 
 	size_t testsCount = 50;
-	size_t start = -2000;
-	size_t end = 2000;
+	int start = -2000;
+	int end = 2000;
 	size_t sampleSize = 1000;
 	{
 		SortingAlgorithm* ts = new TreeSort();
 		TestFixture test(ts);
 		std::cout << "Tree sort: " << std::endl;
-		TestResult res = test.runRandomizedTests(testsCount, true, start, end, 30);
+		TestResult res = test.runRandomizedTests(testsCount, true, start, end, sampleSize);
 		totalPassed += res.passed;
 		totalFailed += res.failed;
 		delete ts;

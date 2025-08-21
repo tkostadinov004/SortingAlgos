@@ -18,7 +18,7 @@ std::vector<int> buildRandomizedVector(bool getUnique, int startRange, int endRa
 	std::set<int> nums;
 	for (size_t i = 0; i < sampleSize; i++)
 	{
-		int range = abs(endRange) - startRange + 1;
+		int range = abs(endRange - startRange + 1);
 
 		int generated = (rand() % range) + startRange;
 		while (getUnique && nums.find(generated) != nums.end())
