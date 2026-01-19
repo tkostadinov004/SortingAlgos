@@ -4,7 +4,6 @@
 #include <random>
 #include <iostream>
 #include <unordered_set>
-#include <set>
 
 TestFixture::TestFixture(SortingAlgorithm* algorithm)
 {
@@ -13,18 +12,26 @@ TestFixture::TestFixture(SortingAlgorithm* algorithm)
 
 std::vector<int> buildRandomizedVector(bool getUnique, int startRange, int endRange, size_t sampleSize)
 {
+	constexpr unsigned MAX_ATTEMPTS = 50;
+	
 	std::vector<int> data;
 	srand((unsigned)time(0));
-	std::set<int> nums;
+	std::unordered_set<int> nums;
 	for (size_t i = 0; i < sampleSize; i++)
 	{
 		int range = endRange - startRange + 1;
 
 		int generated = (rand() % range) + startRange;
-		while (getUnique && nums.find(generated) != nums.end())
+		unsigned attempts = 1;
+		while (getUnique && nums.find(generated) != nums.end() && attempts++ < MAX_ATTEMPTS)
 		{
 			generated = (rand() % range) + startRange;
 		}
+		if (attempts > MAX_ATTEMPTS) 
+		{
+			throw std::logic_error("Unable to generate randomized vector of unique numbers! Failed after " + std::to_string(attempts - 1) + " attempts.");
+		}
+		
 		nums.emplace(generated);
 		data.push_back(generated);
 	}
